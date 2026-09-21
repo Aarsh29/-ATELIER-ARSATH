@@ -1,76 +1,71 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Sparkles, Orbit, Compass } from 'lucide-react';
+import { ArrowDown, Sparkles } from 'lucide-react';
 import { useAtelier } from '../context/AtelierContext';
-import { HeroScene3D, TextileType } from './HeroScene3D';
-
-const TEXTILES: { id: TextileType; num: string; name: string; subtitle: string; color: string }[] = [
-  { id: 'crimson', num: '01', name: 'CRIMSON & 24K ZARI', subtitle: 'Heavy Mulberry Drape', color: '#8B1E2D' },
-  { id: 'champagne', num: '02', name: 'CHAMPAGNE TISSUE', subtitle: 'Liquid Metallic Sheen', color: '#D4AF37' },
-  { id: 'emerald', num: '03', name: 'EMERALD MATKA', subtitle: 'Raw Loom Texture', color: '#1B4D3E' },
-];
 
 export const Hero: React.FC = () => {
   const { navigateTo, playSfx } = useAtelier();
-  const [activeTextile, setActiveTextile] = useState<TextileType>('crimson');
 
   return (
-    <section className="relative w-full min-h-screen flex flex-col justify-between pt-24 pb-10 px-6 sm:px-12 lg:px-16 overflow-hidden select-none">
-      {/* Interactive 3D WebGL Cloth Canvas (Awwwards 3D Silk Simulation) */}
-      <HeroScene3D
-        activeTextile={activeTextile}
-        onInteract={() => playSfx('rustle')}
-      />
+    <section className="relative w-full min-h-screen flex flex-col justify-between pt-24 pb-12 px-6 sm:px-12 lg:px-16 overflow-hidden select-none">
+      {/* Background Architectural Canvas with subtle movement */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        {/* Cinematic Backdrop Image with Film Wash */}
+        <motion.div
+          initial={{ scale: 1.08 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full h-full"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=2200&auto=format&fit=crop"
+            alt="Atelier Aarsh Couture Silks"
+            className="w-full h-full object-cover object-top opacity-85 brightness-90 contrast-[0.95]"
+          />
+        </motion.div>
 
-      {/* Editorial Vignette & Depth Gradients (Guarantees Typography Contrast) */}
-      <div className="absolute inset-0 pointer-events-none -z-10 bg-gradient-to-t from-[#0F0D0C] via-[#0F0D0C]/40 to-[#0F0D0C]/70" />
-      <div className="absolute inset-0 pointer-events-none -z-10 bg-gradient-to-r from-[#0F0D0C]/85 via-transparent to-[#0F0D0C]/60" />
-      <div className="absolute inset-0 pointer-events-none -z-10 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(15,13,12,0.7)_100%)]" />
+        {/* Tactile Dark Wash Gradient to guarantee editorial text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0D0C]/90 via-[#0F0D0C]/35 to-[#0F0D0C]/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0D0C]/80 via-transparent to-[#0F0D0C]/40" />
+      </div>
 
       {/* Top Meta Bar */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
-        className="relative z-10 flex items-center justify-between text-[#E6DFD5] text-[10px] tracking-[0.35em] uppercase font-sans border-b border-white/10 pb-4 max-w-[1720px] w-full mx-auto"
+        className="flex items-center justify-between text-[#E6DFD5] text-[10px] tracking-[0.35em] uppercase font-sans border-b border-white/10 pb-4 max-w-[1720px] w-full mx-auto"
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-[#C5A880] animate-pulse" />
           <span>AUTUMN / WINTER 2026 BRIDAL SALON</span>
         </div>
-
-        {/* 3D Interaction Prompt Badge */}
-        <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/15 text-[9px] tracking-[0.25em] text-[#C5A880]">
-          <Orbit className="w-3 h-3 animate-spin" style={{ animationDuration: '10s' }} />
-          <span>3D TEXTILE SCULPTURE • DRAG TO ROTATE • HOVER TO RIPPLE</span>
-        </div>
-
-        <div className="hidden sm:block text-[#C5A880]">
+        <div className="hidden sm:block">
           <span>CHENNAI — COUTURE HOUSE NO. 07</span>
         </div>
       </motion.div>
 
-      {/* Center Cinematic Typography & Spatial Composition */}
-      <div className="relative z-10 max-w-[1720px] w-full mx-auto my-auto py-10">
+      {/* Center Cinematic Typography Composition */}
+      <div className="max-w-[1720px] w-full mx-auto my-auto py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
           {/* Main Title Stack */}
           <div className="lg:col-span-8">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#1A1614]/80 backdrop-blur-md border border-[#C5A880]/35 rounded-full text-[#C5A880] text-[9px] tracking-[0.3em] uppercase mb-6"
+              transition={{ duration: 1, delay: 0.4 }}
+              className="inline-flex items-center gap-2 px-3 py-1 bg-[#1A1614]/70 border border-[#C5A880]/30 rounded-full text-[#C5A880] text-[9px] tracking-[0.3em] uppercase mb-6"
             >
               <Sparkles className="w-3 h-3" />
-              <span>THE COUTURE EXPERIMENT • GENERATIVE SILK</span>
+              <span>THE COUTURE EXPERIMENT</span>
             </motion.div>
 
             <div className="overflow-hidden">
               <motion.h1
                 initial={{ y: 120, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1.3, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight text-[#FBF9F5] font-light leading-[0.92] drop-shadow-2xl"
+                transition={{ duration: 1.3, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight text-[#FBF9F5] font-light leading-[0.92]"
               >
                 CRAFTED FOR
                 <br />
@@ -79,60 +74,17 @@ export const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Narrative Callout + Live Textile Switcher */}
+          {/* Right Column: Narrative Callout */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
+            transition={{ duration: 1, delay: 0.8 }}
             className="lg:col-span-4 space-y-6 lg:pl-8 border-l border-white/10 pb-2"
           >
-            <p className="text-[#E6DFD5]/90 text-sm sm:text-base font-sans font-light leading-relaxed tracking-wide drop-shadow-sm">
+            <p className="text-[#E6DFD5]/90 text-sm sm:text-base font-sans font-light leading-relaxed tracking-wide">
               We reject the industrial repetition of standard fashion. Every drape is an architectural dialogue between pure Tamil pit-loom mulberry silk and the rhythm of human hands.
             </p>
 
-            {/* Interactive 3D Textile Morphing HUD */}
-            <div className="pt-2">
-              <div className="text-[9px] uppercase tracking-[0.3em] text-[#C5A880] mb-2.5 flex items-center gap-1.5 font-medium">
-                <Compass className="w-3 h-3 text-[#C5A880]" />
-                <span>SELECT WEAVE / 3D MATERIAL</span>
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                {TEXTILES.map((t) => {
-                  const isSelected = activeTextile === t.id;
-                  return (
-                    <button
-                      key={t.id}
-                      onClick={() => {
-                        setActiveTextile(t.id);
-                        playSfx('rustle');
-                      }}
-                      className={`relative group p-2.5 rounded border text-left transition-all duration-300 cursor-pointer ${
-                        isSelected
-                          ? 'bg-white/15 border-[#C5A880] shadow-lg shadow-[#C5A880]/10 scale-[1.02]'
-                          : 'bg-black/40 border-white/10 hover:border-white/30 hover:bg-white/5'
-                      }`}
-                      data-cursor="TOUCH"
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-[8px] font-mono tracking-widest text-[#E6DFD5]/60">{t.num}</span>
-                        <span
-                          className="w-2 h-2 rounded-full border border-white/30 transition-transform group-hover:scale-125"
-                          style={{ backgroundColor: t.color }}
-                        />
-                      </div>
-                      <div className="text-[9px] font-sans tracking-[0.15em] text-[#FBF9F5] uppercase font-medium truncate">
-                        {t.name.split('&')[0]}
-                      </div>
-                      <div className="text-[7.5px] tracking-wider text-[#E6DFD5]/50 truncate mt-0.5">
-                        {t.subtitle}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* CTA Action Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <button
                 onClick={() => {
@@ -161,17 +113,17 @@ export const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Status / Navigation Bar */}
+      {/* Bottom Subtle Navigation Indicators */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.8 }}
-        className="relative z-10 flex items-center justify-between text-[#E6DFD5]/70 text-[9px] tracking-[0.3em] uppercase max-w-[1720px] w-full mx-auto pt-4 border-t border-white/10"
+        transition={{ duration: 1, delay: 1 }}
+        className="flex items-center justify-between text-[#E6DFD5]/70 text-[9px] tracking-[0.3em] uppercase max-w-[1720px] w-full mx-auto pt-4 border-t border-white/10"
       >
         <div className="flex items-center gap-4">
           <span>01 / 07 CHAPTERS</span>
           <span className="hidden md:inline-block opacity-40">•</span>
-          <span className="hidden md:inline-block text-[#C5A880]">KANCHIPURAM WEAVE SIMULATOR (60 FPS)</span>
+          <span className="hidden md:inline-block opacity-60">PURE KANCHIPURAM × AARI EMBROIDERY</span>
         </div>
 
         <button
@@ -190,4 +142,3 @@ export const Hero: React.FC = () => {
     </section>
   );
 };
-
